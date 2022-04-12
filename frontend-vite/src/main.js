@@ -15,7 +15,7 @@ const httpLink = createHttpLink({
 const cache = new InMemoryCache();
 
 const apolloClient = new ApolloClient({
-  link: HttpLink,
+  link: httpLink,
   cache,
 });
 
@@ -36,4 +36,11 @@ const ALL_BOOK_QUERY = gql`
 //   })
 //   .then(res);
 
-createApp(App).mount("#app");
+const app = createApp({
+  setup() {
+    provide(DefaultApolloClient, apolloClient);
+  },
+  render: () => h(App),
+});
+
+app.mount("#app");
