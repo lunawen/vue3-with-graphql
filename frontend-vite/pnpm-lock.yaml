@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@apollo/client': ^3.5.10
+  '@rollup/plugin-graphql': ^1.1.0
   '@vitejs/plugin-vue': ^2.3.0
   '@vue/apollo-composable': ^4.0.0-alpha.16
   graphql: ^16.3.0
@@ -11,6 +12,7 @@ specifiers:
 
 dependencies:
   '@apollo/client': 3.5.10_graphql@16.3.0
+  '@rollup/plugin-graphql': 1.1.0_graphql@16.3.0
   '@vue/apollo-composable': 4.0.0-alpha.16_de8f387c9804e761c2b1f1395149cc64
   graphql: 16.3.0
   graphql-tag: 2.12.6_graphql@16.3.0
@@ -64,6 +66,25 @@ packages:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       graphql: 16.3.0
+    dev: false
+
+  /@rollup/plugin-graphql/1.1.0_graphql@16.3.0:
+    resolution: {integrity: sha512-X+H6oFlprDlnO3D0UiEytdW97AMphPXO0C7KunS7i/rBXIGQRQVDU5WKTXnBu2tfyYbjCTtfhXMSGI0i885PNg==}
+    peerDependencies:
+      graphql: '>=0.9.0'
+      rollup: ^1.20.0 || ^2.0.0
+    dependencies:
+      '@rollup/pluginutils': 4.2.1
+      graphql: 16.3.0
+      graphql-tag: 2.12.6_graphql@16.3.0
+    dev: false
+
+  /@rollup/pluginutils/4.2.1:
+    resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
     dev: false
 
   /@vitejs/plugin-vue/2.3.1_vite@2.9.1+vue@3.2.31:
@@ -504,6 +525,11 @@ packages:
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+
+  /picomatch/2.3.1:
+    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
+    engines: {node: '>=8.6'}
+    dev: false
 
   /postcss/8.4.12:
     resolution: {integrity: sha512-lg6eITwYe9v6Hr5CncVbK70SoioNQIq81nsaG86ev5hAidQvmOeETBqs7jm43K2F5/Ley3ytDtriImV6TpNiSg==}

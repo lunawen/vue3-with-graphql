@@ -1,22 +1,11 @@
 <script>
 import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-import { ref } from "vue";
-
-const ALL_BOOK_QUERY = gql`
-  query AllBooks {
-    allBooks {
-      id
-      title
-      rating
-    }
-  }
-`;
+import ALL_BOOKS_QUERY from "./graphql/allBooks.query.gql";
 
 export default {
   name: "App",
   setup() {
-    const { result } = useQuery(ALL_BOOK_QUERY);
+    const { result } = useQuery(ALL_BOOKS_QUERY);
     return { result };
   },
 };
@@ -24,7 +13,7 @@ export default {
 
 <template>
   <div>
-    <p v-for="book in result.allBooks" :key="book.id">
+    <p v-for="book in result?.allBooks" :key="book.id">
       {{ book.title }}
     </p>
   </div>
