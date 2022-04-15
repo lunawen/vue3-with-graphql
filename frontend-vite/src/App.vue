@@ -5,7 +5,7 @@ import ALL_BOOKS_QUERY from "./graphql/allBooks.query.gql";
 export default {
   name: "App",
   setup() {
-    const { result } = useQuery(ALL_BOOKS_QUERY);
+    const { result } = useQuery(ALL_BOOKS_QUERY, { search: "the" });
     return { result };
   },
 };
