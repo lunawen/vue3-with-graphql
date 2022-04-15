@@ -1,18 +1,23 @@
 <script>
 import { useQuery } from "@vue/apollo-composable";
 import ALL_BOOKS_QUERY from "./graphql/allBooks.query.gql";
+import { ref } from "vue";
 
 export default {
   name: "App",
   setup() {
-    const { result } = useQuery(ALL_BOOKS_QUERY, { search: "the" });
-    return { result };
+    const searchTerm = ref("");
+    const { result } = useQuery(ALL_BOOKS_QUERY, () => ({
+      search: searchTerm.value,
+    }));
+    return { result, searchTerm };
   },
 };
 </script>
 
 <template>
   <div>
+    <input type="text" v-model="searchTerm" />
     <p v-for="book in result?.allBooks" :key="book.id">
       {{ book.title }}
     </p>
