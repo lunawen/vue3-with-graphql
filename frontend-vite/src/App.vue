@@ -7,10 +7,10 @@ export default {
   name: "App",
   setup() {
     const searchTerm = ref("");
-    const { result } = useQuery(ALL_BOOKS_QUERY, () => ({
+    const { result, loading } = useQuery(ALL_BOOKS_QUERY, () => ({
       search: searchTerm.value,
     }));
-    return { result, searchTerm };
+    return { result, searchTerm, loading };
   },
 };
 </script>
@@ -18,9 +18,12 @@ export default {
 <template>
   <div>
     <input type="text" v-model="searchTerm" />
-    <p v-for="book in result?.allBooks" :key="book.id">
-      {{ book.title }}
-    </p>
+    <p v-if="loading">Loading...</p>
+    <template v-else>
+      <p v-for="book in result?.allBooks" :key="book.id">
+        {{ book.title }}
+      </p>
+    </template>
   </div>
 </template>
 
