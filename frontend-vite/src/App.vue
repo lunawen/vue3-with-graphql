@@ -1,7 +1,7 @@
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import { ref } from "vue";
 
 const ALL_BOOK_QUERY = gql`
   query AllBooks {
@@ -12,17 +12,22 @@ const ALL_BOOK_QUERY = gql`
     }
   }
 `;
+
 export default {
   name: "App",
   setup() {
     const { result } = useQuery(ALL_BOOK_QUERY);
-    console.log(result);
+    return { result };
   },
 };
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <div>
+    <p v-for="book in result.allBooks" :key="book.id">
+      {{ book.title }}
+    </p>
+  </div>
 </template>
 
 <style>
