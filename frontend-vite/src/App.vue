@@ -7,9 +7,17 @@ export default {
   name: "App",
   setup() {
     const searchTerm = ref("");
-    const { result, loading, error } = useQuery(ALL_BOOKS_QUERY, () => ({
-      search: searchTerm.value,
-    }));
+    const { result, loading, error } = useQuery(
+      ALL_BOOKS_QUERY,
+      () => ({
+        search: searchTerm.value,
+      }),
+      // only start query when user stopped typing for 0.5 seconds and the search term > 2 characters
+      () => ({
+        debounce: 500,
+        enabled: searchTerm.value.length > 2,
+      })
+    );
     return { result, searchTerm, loading, error };
   },
 };
