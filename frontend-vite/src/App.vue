@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div>
+      <button v-if="!showNewBookForm" @click="showNewBookForm = true">
+        Add a new book
+      </button>
+      <AddBook v-if="showNewBookForm" @closeForm="showNewBookForm = false" />
+    </div>
     <input type="text" v-model="searchTerm" />
     <p v-if="loading">Loading...</p>
     <p v-else-if="error">Something went wrong...</p>
@@ -27,15 +33,18 @@ import { useQuery, useResult } from "@vue/apollo-composable";
 import ALL_BOOKS_QUERY from "./graphql/allBooks.query.gql";
 import { ref } from "vue";
 import EditRating from "./components/EditRating.vue";
+import AddBook from "./components/AddBook.vue";
 
 export default {
   name: "App",
   components: {
     EditRating,
+    AddBook,
   },
   setup() {
     const searchTerm = ref("");
     const activeBook = ref(null);
+    const showNewBookForm = ref(false);
     const { result, loading, error } = useQuery(
       ALL_BOOKS_QUERY,
       () => ({
@@ -49,7 +58,7 @@ export default {
     );
 
     const books = useResult(result, [], (data) => data.allBooks);
-    return { books, searchTerm, loading, error, activeBook };
+    return { books, searchTerm, loading, error, activeBook, showNewBookForm };
   },
 };
 </script>
