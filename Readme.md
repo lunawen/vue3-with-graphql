@@ -18,3 +18,7 @@ cd frontend-vite
 npm i
 npm run dev
 ```
+
+## 3. Issues
+
+The subscription is not working properly, I've raised an [issue](https://github.com/enisdenjo/graphql-ws/issues/351) to the library repo.
