@@ -29,6 +29,10 @@
             <p v-for="book in books" :key="book.id">
               {{ book.title }} - {{ book.rating }}
               <button @click="activeBook = book">Edit rating</button>
+              <!-- New button here -->
+              <button @click="addBookToFavorites({ book })">
+                Add to Favorites
+              </button>
             </p>
           </div>
           <div class="list">
@@ -44,7 +48,7 @@
 </template>
 
 <script>
-import { useQuery, useResult } from "@vue/apollo-composable";
+import { useQuery, useResult, useMutation } from "@vue/apollo-composable";
 import { ref } from "vue";
 
 import AddBook from "./components/AddBook.vue";
@@ -53,6 +57,7 @@ import EditRating from "./components/EditRating.vue";
 import ALL_BOOKS_QUERY from "./graphql/allBooks.query.gql";
 import BOOK_SUBSCRIPTION from "./graphql/newBook.subscription.gql";
 import FAVORITE_BOOKS_QUERY from "./graphql/favoriteBooks.query.gql";
+import ADD_BOOK_TO_FAVORITES_MUTATION from "./graphql/addBookToFavorites.mutation.gql";
 
 export default {
   name: "App",
@@ -93,7 +98,12 @@ export default {
     const books = useResult(result, [], (data) => data.allBooks);
 
     const { result: favBooksResult } = useQuery(FAVORITE_BOOKS_QUERY);
-    console.log(favBooksResult.value);
+    // console.log(favBooksResult.value);
+
+    const { mutate: addBookToFavorites } = useMutation(
+      ADD_BOOK_TO_FAVORITES_MUTATION
+    );
+
     return {
       books,
       searchTerm,
@@ -102,6 +112,7 @@ export default {
       activeBook,
       showNewBookForm,
       favBooksResult,
+      addBookToFavorites,
     };
   },
 };

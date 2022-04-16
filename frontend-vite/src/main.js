@@ -62,11 +62,29 @@ cache.writeQuery({
   },
 });
 
+// add favourites to local state
+const resolvers = {
+  Mutation: {
+    addBookToFavorites: (_, { book }, { cache }) => {
+      // get current data
+      const data = cache.readQuery({ query: FAVORITE_BOOKS_QUERY });
+      // construct new data
+      const newData = {
+        favoriteBooks: [...data.favoriteBooks, book],
+      };
+      // write to cache
+      cache.writeQuery({ query: FAVORITE_BOOKS_QUERY, data: newData });
+      return newData.favoriteBooks;
+    },
+  },
+};
+
 const apolloClient = new ApolloClient({
   // link, // todo: use this link once the getSession issue is resolved
   link: httpLink,
   cache,
   typeDefs,
+  resolvers,
 });
 
 const app = createApp({
