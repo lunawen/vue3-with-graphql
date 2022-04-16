@@ -4,7 +4,11 @@
       <button v-if="!showNewBookForm" @click="showNewBookForm = true">
         Add a new book
       </button>
-      <AddBook v-if="showNewBookForm" @closeForm="showNewBookForm = false" />
+      <AddBook
+        v-if="showNewBookForm"
+        :search="searchTerm"
+        @closeForm="showNewBookForm = false"
+      />
     </div>
     <input type="text" v-model="searchTerm" />
     <p v-if="loading">Loading...</p>
@@ -53,7 +57,7 @@ export default {
       // only start query when user stopped typing for 0.5 seconds and the search term > 2 characters
       () => ({
         debounce: 500,
-        enabled: searchTerm.value.length > 2,
+        // enabled: searchTerm.value.length > 2,
       })
     );
 
