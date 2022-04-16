@@ -57,7 +57,14 @@ export default {
           query: ALL_BOOKS_QUERY,
           variables: { search: props.search },
         });
-        console.log(sourceData);
+        const data = {
+          allBooks: [...sourceData.allBooks, response.data.addBook],
+        };
+        cache.writeQuery({
+          data,
+          query: ALL_BOOKS_QUERY,
+          variables: { search: props.search },
+        });
       },
     }));
 
