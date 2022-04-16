@@ -1,0 +1,8 @@
+#import './book.fragment.gql'
+
+query favoriteBooks {
+  # we don't want apollo to check the server, so we use @client directive to make sure it's only talking to local cache
+  favoriteBooks @client {
+    ...BookFragment
+  }
+}
