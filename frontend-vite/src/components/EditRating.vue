@@ -26,17 +26,19 @@ export default {
   setup(props, { emit }) {
     // we create a local copy of the prop to edit the rating
     const rating = ref(props.initialRating);
-    const { mutate } = useMutation(UPDATE_BOOK_MUTATION, () => ({
-      variables: {
-        id: props.bookId,
-        rating: parseFloat(rating.value),
-      },
-    }));
-    const updateRating = () => {
-      console.log(rating.value);
-      mutate();
+    const { mutate: updateRating, onDone } = useMutation(
+      UPDATE_BOOK_MUTATION,
+      () => ({
+        variables: {
+          id: props.bookId,
+          rating: parseFloat(rating.value),
+        },
+      })
+    );
+
+    onDone(() => {
       emit("closeForm");
-    };
+    });
 
     return { rating, updateRating };
   },
