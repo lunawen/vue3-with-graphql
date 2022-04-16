@@ -66,6 +66,14 @@ export default {
           variables: { search: props.search },
         });
       },
+      // show the new object before the resolve has completed
+      optimisticResponse: {
+        addBook: {
+          __typename: "Book",
+          id: -1, // we don't know the id yet
+          ...newBook,
+        },
+      },
     }));
 
     onDone(() => emit("closeForm"));
