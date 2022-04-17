@@ -81,7 +81,7 @@ export default {
       })
     );
 
-    // Todo: uncomment this when the getSession issue is resolved
+    // Todo: update server side to make the websocket connect work
     // subscribeToMore(() => ({
     //   document: BOOK_SUBSCRIPTION,
     //   updateQuery(previousResult, newResult) {

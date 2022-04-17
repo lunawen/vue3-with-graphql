@@ -13,21 +13,13 @@ import typeDefs from "./graphql/typedefs.gql";
 import FAVORITE_BOOKS_QUERY from "./graphql/favoriteBooks.query.gql";
 import App from "./App.vue";
 
-// Todo: used for subscriptions, this is not working
-const wsLink = new GraphQLWsLink(
-  createClient({
-    url: "ws://localhost:4000/graphql",
-    connectionParams: () => {
-      const session = getSession();
-      if (!session) {
-        return {};
-      }
-      return {
-        Authorization: `Bearer ${session.token}`,
-      };
-    },
-  })
-);
+// Todo: update server side code first
+// const wsLink = new GraphQLWsLink(
+//   createClient({
+//     url: "ws://localhost:4000/graphql",
+//     keepAlive: 10_000,
+//   })
+// );
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -80,7 +72,7 @@ const resolvers = {
 };
 
 const apolloClient = new ApolloClient({
-  // link, // todo: use this link once the getSession issue is resolved
+  // link, // todo: use this link once the server is updated
   link: httpLink,
   cache,
   typeDefs,
