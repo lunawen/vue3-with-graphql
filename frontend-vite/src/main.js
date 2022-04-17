@@ -25,17 +25,17 @@ const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
 });
 
-const link = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === "OperationDefinition" &&
-      definition.operation === "subscription"
-    );
-  },
-  wsLink,
-  httpLink
-);
+// const link = split(
+//   ({ query }) => {
+//     const definition = getMainDefinition(query);
+//     return (
+//       definition.kind === "OperationDefinition" &&
+//       definition.operation === "subscription"
+//     );
+//   },
+//   wsLink,
+//   httpLink
+// );
 
 const cache = new InMemoryCache();
 
